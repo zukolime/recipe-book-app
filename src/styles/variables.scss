@@ -1,0 +1,17 @@
+$logo-color: #ad4900;
+$bg-color: #fafafa;
+$main-text-color: #1f2937;
+$secondary-text-color: #6b7280;
+$secondary-bg-color: #c5c5c5;
+$active-color: #4f46e5;
+$fav-active-color: #fb3f3f;
+$fav-filter: brightness(0) saturate(100%) invert(10%) sepia(97%) saturate(5807%)
+  hue-rotate(1deg) brightness(93%) contrast(112%);
+$fav-gradient: linear-gradient(
+  90deg,
+  rgba(251, 63, 63, 1) 15%,
+  rgba(252, 125, 70, 1) 100%
+);
+
+$default-size: 8px;
+$border-style: 1px solid #e5e7eb;

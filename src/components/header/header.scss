@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Delius&display=swap");
+@import "/src/styles/mixins.scss";
+@import "/src/styles/variables.scss";
+
+.header {
+  display: flex;
+  border-bottom: $border-style;
+  min-height: 64px;
+
+  &__inner {
+    @include flex-center;
+    justify-content: space-between;
+    height: 100%;
+    gap: clamp(0.5rem, -0.88rem + 2.4vw, 2rem);
+  }
+
+  &__logo {
+    @include flex-center;
+    font-family: "Delius", cursive;
+    color: $logo-color;
+    height: 100%;
+    font-size: 42px;
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  &__nav {
+    height: 100%;
+  }
+
+  &__nav-items {
+    @include flex-center;
+    height: 100%;
+    gap: 32px;
+    color: $secondary-text-color;
+    font-size: 24px;
+    list-style: none;
+  }
+
+  &__nav-item {
+    position: relative;
+    height: 100%;
+
+    & a {
+      @include flex-center;
+      height: 100%;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+      width: 0px;
+      height: 2px;
+      background-color: $logo-color;
+      transition: width 0.3s;
+    }
+  }
+}
+
+@media (hover: hover) {
+  .header__nav-item:hover {
+    color: $logo-color;
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 100%;
+      left: 0;
+      background-color: $logo-color;
+    }
+  }
+}
+
+@media (hover: none) {
+  .header__nav-item {
+    color: $main-text-color;
+  }
+}
+
+@media (max-width: 992px) {
+  .header__inner {
+    flex-direction: column;
+  }
+}
