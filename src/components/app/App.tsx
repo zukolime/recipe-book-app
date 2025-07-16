@@ -5,6 +5,7 @@ import Banner from "../Banner/Banner";
 import SearchPanel from "../SearchPanel/SearchPanel";
 import CardsList from "../CardsList/CardsList";
 import Seporator from "../Seporator/Seporator";
+import Tabs from "../Tabs/Tabs";
 
 import "../../styles/main.scss";
 
@@ -17,6 +18,7 @@ function App() {
         <SearchPanel />
         <CardsList />
         <Seporator />
+        <Tabs />
       </div>
     </>
   );
