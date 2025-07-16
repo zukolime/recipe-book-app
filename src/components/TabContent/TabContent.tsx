@@ -1,3 +1,5 @@
+import "../TabContent/tab-content.scss";
+
 const TabContent = () => {
   return (
     <>
