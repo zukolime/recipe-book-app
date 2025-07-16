@@ -1,0 +1,30 @@
+@import "/src/styles/mixins.scss";
+@import "/src/styles/variables.scss";
+
+.favorite {
+  @include flex-center;
+  justify-content: center;
+  margin-left: auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #fff;
+
+  img {
+    width: 100%;
+    transition: filter 0.3s;
+  }
+}
+
+.favorite--big {
+  width: 36px;
+  height: 36px;
+}
+
+@media (hover: hover) {
+  .favorite:hover {
+    img {
+      filter: $fav-filter;
+    }
+  }
+}

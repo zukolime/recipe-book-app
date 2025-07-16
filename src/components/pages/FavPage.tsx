@@ -5,7 +5,11 @@ import CardsList from "../CardsList/CardsList";
 const FavPage = () => {
   return (
     <>
-      <Banner />
+      <Banner
+        title="My Favorite Recipes"
+        description="A curated collection of my most loved dishes, perfect for any occasion"
+        backgroundColor="banner__inner banner__inner--fav-page"
+      />
       <SearchPanel />
       <CardsList />
     </>

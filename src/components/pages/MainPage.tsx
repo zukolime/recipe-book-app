@@ -5,7 +5,7 @@ import CardsList from "../CardsList/CardsList";
 const MainPage = () => {
   return (
     <>
-      <Banner />
+      <Banner title="Discover Recipes" />
       <SearchPanel />
       <CardsList />
     </>

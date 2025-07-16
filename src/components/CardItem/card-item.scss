@@ -46,18 +46,6 @@
   &__time {
     color: $secondary-text-color;
   }
-
-  [value="hard"] {
-    color: #ff5016;
-  }
-
-  [value="medium"] {
-    color: #f59e0b;
-  }
-
-  [value="easy"] {
-    color: #10b981;
-  }
 }
 
 @media (hover: hover) {

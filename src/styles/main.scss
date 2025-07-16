@@ -45,6 +45,18 @@ input::placeholder {
   font-family: "Libre Baskerville", serif;
 }
 
+[data-value="hard"] {
+  color: #ff5016;
+}
+
+[data-value="medium"] {
+  color: #f59e0b;
+}
+
+[data-value="easy"] {
+  color: #10b981;
+}
+
 .container {
   width: 70%;
   margin: 0 auto;
@@ -61,34 +73,6 @@ input::placeholder {
 .active {
   color: #fff;
   background-color: $active-color;
-}
-
-.favorite {
-  @include flex-center;
-  justify-content: center;
-  margin-left: auto;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: #fff;
-
-  img {
-    width: 100%;
-    transition: filter 0.3s;
-  }
-}
-
-.favorite--big {
-  width: 36px;
-  height: 36px;
-}
-
-@media (hover: hover) {
-  .favorite:hover {
-    img {
-      filter: $fav-filter;
-    }
-  }
 }
 
 @media (max-width: 720px) {

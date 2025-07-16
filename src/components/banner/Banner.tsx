@@ -1,39 +1,60 @@
-import fav from "../../resources/icons/fav.svg";
-import hourglass from "../../resources/icons/hourglass.svg";
-import level from "../../resources/icons/level.svg";
+import React, { ReactNode } from "react";
+
+import hourglassIcon from "../../resources/icons/hourglass.svg";
+import levelIcon from "../../resources/icons/level.svg";
 
 import "../Banner/banner.scss";
 
-const Banner = () => {
+interface BannerProps {
+  title: string;
+  description?: string;
+  backgroundColor?: string;
+  backgroundImg?: string;
+  time?: string;
+  level?: string;
+  children?: ReactNode;
+}
+
+const Banner = ({
+  title,
+  description,
+  time,
+  level,
+  backgroundColor,
+  backgroundImg,
+  children,
+}: BannerProps) => {
   return (
     <section className="banner">
       <div className="container">
-        <div className="banner__bg">
-          <button className="favorite favorite--big">
-            <img className="favorite__icon" src={fav} alt="favorite" />
-          </button>
-          <div className="banner__inner">
-            <h1 className="banner__title">Mediterranean Chicken Skillet</h1>
-            <p className="banner__descr">
-              A vibrant and flavorful one-pan Mediterranean chicken dish
-              featuring tender chicken breast, colorful bell peppers, and a rich
-              tomato-cream sauce. Perfect for weeknight dinners and packed with
-              fresh herbs and aromatic spices.
-            </p>
-            <div className="banner__details">
-              <div className="banner__detail">
-                <div className="banner__icon">
-                  <img src={hourglass} alt="hourglass icon" />
+        <div className={backgroundImg}>
+          {children}
+          <div className={backgroundColor}>
+            <h1 className="banner__title">{title}</h1>
+
+            {description && <p className="banner__descr">{description}</p>}
+
+            {(time || level) && (
+              <div className="banner__details">
+                <div className="banner__detail">
+                  <div className="banner__icon">
+                    <img src={hourglassIcon} alt="hourglass icon" />
+                  </div>
+                  <span className="banner__detail-text">{time} mins</span>
                 </div>
-                <span className="banner__detail-text">35 mins</span>
-              </div>
-              <div className="banner__detail">
-                <div className="banner__icon">
-                  <img src={level} alt="level icon" />
+                <div className="banner__detail">
+                  <div className="banner__icon">
+                    <img src={levelIcon} alt="level icon" />
+                  </div>
+                  <span
+                    className="banner__detail-text"
+                    data-value={level?.toLowerCase()}
+                  >
+                    {level}
+                  </span>
                 </div>
-                <span className="banner__detail-text">Easy</span>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

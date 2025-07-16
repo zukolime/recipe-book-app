@@ -6,10 +6,6 @@ import MainPage from "../pages/MainPage";
 import FavPage from "../pages/FavPage";
 import RecipePage from "../pages/RecipePage";
 import Seporator from "../Seporator/Seporator";
-// import Banner from "../Banner/Banner";
-// import SearchPanel from "../SearchPanel/SearchPanel";
-// import CardsList from "../CardsList/CardsList";
-// import Tabs from "../Tabs/Tabs";
 
 import "../../styles/main.scss";
 
