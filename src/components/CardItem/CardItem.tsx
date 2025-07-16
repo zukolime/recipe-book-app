@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import fav from "../../resources/icons/fav.svg";
 
 import "../CardItem/card-item.scss";
@@ -5,7 +7,7 @@ import "../CardItem/card-item.scss";
 const CardItem = () => {
   return (
     <>
-      <a href="/recipe-page.html" className="cards__item">
+      <Link to="/recipe" className="cards__item">
         <div className="cards__header">
           <button className="favorite">
             <img className="cards__icon" src={fav} alt="favorite" />
@@ -23,9 +25,9 @@ const CardItem = () => {
             </span>
           </div>
         </div>
-      </a>
+      </Link>
 
-      <a href="/recipe-page.html" className="cards__item">
+      <Link to="/recipe" className="cards__item">
         <div className="cards__header">
           <button className="favorite">
             <img className="cards__icon" src={fav} alt="favorite" />
@@ -43,9 +45,9 @@ const CardItem = () => {
             </span>
           </div>
         </div>
-      </a>
+      </Link>
 
-      <a href="/recipe-page.html" className="cards__item">
+      <Link to="/recipe" href="/recipe-page.html" className="cards__item">
         <div className="cards__header">
           <button className="favorite">
             <img className="favorite__icon" src={fav} alt="favorite" />
@@ -63,9 +65,9 @@ const CardItem = () => {
             </span>
           </div>
         </div>
-      </a>
+      </Link>
 
-      <a href="/recipe-page.html" className="cards__item">
+      <Link to="/recipe" href="/recipe-page.html" className="cards__item">
         <div className="cards__header">
           <button className="favorite">
             <img className="cards__icon" src={fav} alt="favorite" />
@@ -83,9 +85,9 @@ const CardItem = () => {
             </span>
           </div>
         </div>
-      </a>
+      </Link>
 
-      <a href="/recipe-page.html" className="cards__item">
+      <Link to="/recipe" href="/recipe-page.html" className="cards__item">
         <div className="cards__header">
           <button className="favorite">
             <img className="cards__icon" src={fav} alt="favorite" />
@@ -103,9 +105,9 @@ const CardItem = () => {
             </span>
           </div>
         </div>
-      </a>
+      </Link>
 
-      <a href="/recipe-page.html" className="cards__item">
+      <Link to="/recipe" href="/recipe-page.html" className="cards__item">
         <div className="cards__header">
           <button className="favorite">
             <img className="cards__icon" src={fav} alt="favorite" />
@@ -123,7 +125,7 @@ const CardItem = () => {
             </span>
           </div>
         </div>
-      </a>
+      </Link>
     </>
   );
 };
