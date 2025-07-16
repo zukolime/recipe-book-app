@@ -1,6 +1,10 @@
 import React from "react";
-import Header from "../header/Header";
-import Banner from "../banner/Banner";
+
+import Header from "../Header/Header";
+import Banner from "../Banner/Banner";
+import SearchPanel from "../SearchPanel/SearchPanel";
+import CardsList from "../CardsList/CardsList";
+import Seporator from "../Seporator/Seporator";
 
 import "../../styles/main.scss";
 
@@ -10,6 +14,9 @@ function App() {
       <Header />
       <div className="main">
         <Banner />
+        <SearchPanel />
+        <CardsList />
+        <Seporator />
       </div>
     </>
   );

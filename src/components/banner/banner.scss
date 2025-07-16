@@ -1,0 +1,57 @@
+@import "/src/styles/mixins.scss";
+@import "/src/styles/variables.scss";
+
+.banner {
+  padding-top: 50px;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    gap: $default-size;
+    border-radius: $default-size;
+    color: #fff;
+    background-color: rgb(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+  }
+
+  &__inner--fav-page {
+    background: $fav-active-color;
+    background: $fav-gradient;
+  }
+
+  &__title {
+    font-size: clamp(2.188rem, 1.847rem + 1.7vw, 3.125rem);
+    font-weight: 700;
+  }
+
+  &__descr {
+    font-size: clamp(1rem, 0.963rem + 0.19vw, 1.188rem);
+    font-weight: 400;
+  }
+
+  &__details {
+    @include flex-center;
+    gap: 25px;
+  }
+
+  &__detail {
+    @include flex-center;
+    gap: $default-size;
+  }
+
+  &__icon {
+    width: 24px;
+  }
+
+  &__bg {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px;
+    min-height: 400px;
+    background: url(https://coffee.alexflipnote.dev/random) center / cover
+      no-repeat;
+    border-radius: $default-size;
+  }
+}
