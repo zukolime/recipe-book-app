@@ -1,5 +1,5 @@
 import Banner from "../Banner/Banner";
-import Tabs from "../Tabs/Tabs";
+import Tabs from "../tabs/TabsContainer/TabsContainer";
 import FavBtn from "../FavBtn/FavBtn";
 
 const RecipePage = () => {

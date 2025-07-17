@@ -28,6 +28,10 @@ const CardItem = () => {
         </div>
         <div className="cards__info">
           <h2 className="cards__title">Classic Margherita Pizza</h2>
+          <p className="cards__descr">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Perspiciatis, architecto!
+          </p>
           <div className="cards__footer">
             <span className="cards__time">25 min</span>
             <span className="cards__complexity" data-value="hard">

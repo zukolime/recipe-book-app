@@ -3,6 +3,17 @@
 
 .tabcontent {
   padding-top: 38px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+  height: 0;
+  overflow: hidden;
+
+  &--active {
+    opacity: 1;
+    pointer-events: auto;
+    height: auto;
+  }
 
   &__header {
     @include flex-center;
@@ -39,7 +50,7 @@
     @include flex-center;
 
     &::before {
-      content: url(../../resources/icons/circle.svg);
+      content: url(../../../resources/icons/circle.svg);
       width: $default-size;
       padding: $default-size;
       padding: 0px 8px 4px 0px;

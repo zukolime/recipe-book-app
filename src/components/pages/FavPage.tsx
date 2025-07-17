@@ -10,7 +10,7 @@ const FavPage = () => {
         description="A curated collection of my most loved dishes, perfect for any occasion"
         backgroundColor="banner__inner banner__inner--fav-page"
       />
-      <SearchPanel />
+      <SearchPanel placeholder="Search my favorite recipes..." />
       <CardsList />
     </>
   );

@@ -6,7 +6,7 @@ const MainPage = () => {
   return (
     <>
       <Banner title="Discover Recipes" />
-      <SearchPanel />
+      <SearchPanel placeholder="Search recipes..." />
       <CardsList />
     </>
   );

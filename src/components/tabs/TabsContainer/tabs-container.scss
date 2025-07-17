@@ -15,12 +15,25 @@
 
   &__title {
     @include flex-center;
+    position: relative;
     height: 100%;
     font-weight: 100;
     font-size: 15px;
     background: none;
     border: none;
     cursor: pointer;
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 0;
+      height: 2px;
+      background-color: $active-color;
+      transition: width 0.3s;
+    }
 
     &--active {
       color: #2563eb;
@@ -30,7 +43,7 @@
         content: "";
         display: block;
         position: absolute;
-        right: 0;
+        left: 0;
         bottom: -1px;
         width: 100%;
         height: 2px;
@@ -40,3 +53,21 @@
     }
   }
 }
+
+// @media (hover: hover) {
+//   .tabcontainer__title:hover {
+//     position: relative;
+
+//     &::after {
+//       content: "";
+//       display: block;
+//       position: absolute;
+//       left: 0;
+//       bottom: -1px;
+//       width: 100%;
+//       height: 2px;
+//       background-color: $active-color;
+//       transition: width 0.3s;
+//     }
+//   }
+// }
