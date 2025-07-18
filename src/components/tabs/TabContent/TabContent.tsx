@@ -11,13 +11,13 @@ const TabContent = ({
   return (
     <>
       {activeTab === "ingredients" && (
-        <section className="tabcontent tabcontent--active">
+        <section className="tabcontent tabcontent--active fade-in">
           <IngredientsTab />
         </section>
       )}
 
       {activeTab === "instructions" && (
-        <section className="tabcontent tabcontent--active">
+        <section className="tabcontent tabcontent--active fade-in">
           <InstructionsTab />
         </section>
       )}

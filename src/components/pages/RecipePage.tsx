@@ -7,6 +7,7 @@ const RecipePage = () => {
     <>
       <Banner
         title="Mediterranean Chicken Skillet"
+        description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, architecto! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, architecto!"
         time="35"
         level="Medium"
         backgroundImg="banner__bg"
