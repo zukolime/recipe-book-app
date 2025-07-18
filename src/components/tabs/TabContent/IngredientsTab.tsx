@@ -19,6 +19,13 @@ const IngredientsTab = () => {
     setServings((servings: number) => Math.max(1, servings + step));
   };
 
+  const formatWeight = (grams: number): string => {
+    if (grams >= 1000) {
+      return `${(grams / 1000).toFixed(1)} kg`;
+    }
+    return `${grams} g`;
+  };
+
   return (
     <>
       <div className="tabcontent__header">
@@ -39,7 +46,9 @@ const IngredientsTab = () => {
           <li key={index} className="tabcontent__item">
             <h3 className="tabcontent__item-name">{ingredient.name}</h3>
             <div className="tabcontent__item-info">
-              {ingredient.baseAmount * servings} {ingredient.unit}
+              {ingredient.unit === "g"
+                ? formatWeight(ingredient.baseAmount * servings)
+                : `${ingredient.baseAmount * servings} ${ingredient.unit}`}
             </div>
           </li>
         ))}
