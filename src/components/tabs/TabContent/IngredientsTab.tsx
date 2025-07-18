@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useServings } from "../../../hooks/useServings";
+import formatWeight from "../../../utils/formatWeight";
 
 interface IngredientProps {
   name: string;
@@ -13,29 +14,18 @@ const baseIngredients: IngredientProps[] = [
 ];
 
 const IngredientsTab = () => {
-  const [servings, setServings] = useState(4);
-
-  const calcByServings = (step: number) => {
-    setServings((servings: number) => Math.max(1, servings + step));
-  };
-
-  const formatWeight = (grams: number): string => {
-    if (grams >= 1000) {
-      return `${(grams / 1000).toFixed(1)} kg`;
-    }
-    return `${grams} g`;
-  };
+  const { servings, increase, decrease } = useServings(4, 1);
 
   return (
     <>
       <div className="tabcontent__header">
         <h4 className="tabcontent__title">Ingredients</h4>
         <div className="calc">
-          <button onClick={() => calcByServings(-1)} className="calc__btn">
+          <button onClick={decrease} className="calc__btn">
             -
           </button>
           <span className="calc__text">{servings} servings</span>
-          <button onClick={() => calcByServings(1)} className="calc__btn">
+          <button onClick={increase} className="calc__btn">
             +
           </button>
         </div>
