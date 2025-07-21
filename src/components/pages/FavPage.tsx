@@ -11,7 +11,7 @@ const FavPage = () => {
         backgroundColor="banner__inner banner__inner--fav-page"
       />
       <SearchPanel placeholder="Search my favorite recipes..." />
-      <CardsList />
+      {/* <CardsList />  */}
     </>
   );
 };

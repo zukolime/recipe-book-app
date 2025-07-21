@@ -5,8 +5,8 @@
   @include flex-center;
   justify-content: center;
   margin-left: auto;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background-color: #fff;
 
@@ -16,9 +16,13 @@
   }
 }
 
-.favorite--big {
+.favorite--active {
   width: 36px;
   height: 36px;
+
+  img {
+    filter: $fav-filter;
+  }
 }
 
 @media (hover: hover) {
