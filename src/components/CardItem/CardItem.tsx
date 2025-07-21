@@ -1,10 +1,20 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import useMealData from "../../services/getMealData";
 import FavBtn from "../FavBtn/FavBtn";
 
 import "../CardItem/card-item.scss";
 
 const CardItem = () => {
+  const { getAllRecipes }: any = useMealData();
+
+  useEffect(() => {
+    getAllRecipes().then((data: any) => {
+      console.log(data);
+    });
+  }, []);
+
   return (
     <>
       <Link to="/recipe" className="cards__item">
