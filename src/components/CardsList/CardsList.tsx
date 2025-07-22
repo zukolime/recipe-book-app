@@ -6,9 +6,9 @@ const CardsList = () => {
   return (
     <section className="cards">
       <div className="container">
-        <div className="cards__wrapper">
+        <ul className="cards__wrapper">
           <CardItem />
-        </div>
+        </ul>
       </div>
     </section>
   );

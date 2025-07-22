@@ -1,4 +1,5 @@
 import { useHttp } from "../hooks/http.hook";
+import { shuffleArray } from "../utils/shuffleArray";
 
 const useMealData = () => {
   const { request } = useHttp();
@@ -17,7 +18,7 @@ const useMealData = () => {
       }
     }
 
-    return recipes;
+    return shuffleArray(recipes);
   };
 
   const _transformRecipes = (recipe: any) => {
@@ -43,6 +44,8 @@ const useMealData = () => {
       name: recipe.strMeal,
       instruction: recipe.strInstructions,
       thumbnail: recipe.strMealThumb,
+      category: recipe.strCategory,
+      area: recipe.strArea,
       measures,
       ingredients,
     };

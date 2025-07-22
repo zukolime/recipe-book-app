@@ -20,8 +20,6 @@
     border-top-right-radius: $default-size;
     padding: 12px;
     height: 210px;
-    background: url(https://coffee.alexflipnote.dev/random) center / cover
-      no-repeat;
   }
 
   &__info {
@@ -43,8 +41,9 @@
     font-weight: 500;
   }
 
-  &__time {
-    color: $secondary-text-color;
+  &__category,
+  &__area {
+    color: #10b981;
   }
 }
 
