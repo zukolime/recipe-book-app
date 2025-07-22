@@ -1,16 +1,17 @@
 import { useServings } from "../../../hooks/useServings";
-import formatWeight from "../../../utils/formatWeight";
+import { formatIngredientAmount } from "../../../utils/formatIngredientAmount";
 
 interface IngredientProps {
   name: string;
-  baseAmount: number;
+  baseAmount: string;
   unit: string;
 }
 
 const baseIngredients: IngredientProps[] = [
-  { name: "boneless chicken breasts", baseAmount: 225, unit: "g" },
-  { name: "bell peppers", baseAmount: 100, unit: "g" },
-  { name: "garlic cloves", baseAmount: 1, unit: "clove" },
+  { name: "boneless chicken breasts", baseAmount: "225", unit: "g" },
+  { name: "boneless chicken breasts", baseAmount: "Handful", unit: "Handful" },
+  { name: "bell peppers", baseAmount: "2", unit: "tbs" },
+  { name: "garlic cloves", baseAmount: "1", unit: "clove" },
 ];
 
 const IngredientsTab = () => {
@@ -36,9 +37,11 @@ const IngredientsTab = () => {
           <li key={index} className="tabcontent__item">
             <h3 className="tabcontent__item-name">{ingredient.name}</h3>
             <div className="tabcontent__item-info">
-              {ingredient.unit === "g"
-                ? formatWeight(ingredient.baseAmount * servings)
-                : `${ingredient.baseAmount * servings} ${ingredient.unit}`}
+              {formatIngredientAmount(
+                ingredient.baseAmount,
+                servings,
+                ingredient.unit
+              )}
             </div>
           </li>
         ))}
