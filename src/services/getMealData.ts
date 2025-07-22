@@ -8,16 +8,21 @@ const useMealData = () => {
   const getAllRecipes = async () => {
     const alphabet = "abcdefghijklmnopqrstuvwxyz0123456789";
 
+    let recipes: any[] = [];
+
     for (const letter of alphabet) {
       const res = await request(`${_apiBase}search.php?f=${letter}`);
       if (res.meals) {
-        return res.meals.map(_transformRecipes);
+        recipes = [...recipes, ...res.meals.map(_transformRecipes)];
       }
     }
+
+    return recipes;
   };
 
   const _transformRecipes = (recipe: any) => {
     const ingredients: string[] = [];
+    const measures: string[] = [];
 
     for (let i = 1; i <= 20; i++) {
       const ingredient = recipe[`strIngredient${i}`];
@@ -26,13 +31,19 @@ const useMealData = () => {
       }
     }
 
+    for (let i = 1; i <= 20; i++) {
+      const measure = recipe[`strMeasure${i}`];
+      if (measure && measure.trim() !== "") {
+        measures.push(measure.trim());
+      }
+    }
+
     return {
       id: recipe.idMeal,
       name: recipe.strMeal,
       instruction: recipe.strInstructions,
       thumbnail: recipe.strMealThumb,
-      measure: recipe.strMeasure1.replace(/\w/, ""),
-      unit: recipe.strMeasure1.replace(/\d/, ""),
+      measures,
       ingredients,
     };
   };
