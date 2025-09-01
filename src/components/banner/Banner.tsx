@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 
-import hourglassIcon from "../../resources/icons/hourglass.svg";
-import levelIcon from "../../resources/icons/level.svg";
+import area from "../../resources/icons/area.svg";
+import category from "../../resources/icons/category.svg";
 
 import "../Banner/banner.scss";
 
@@ -15,15 +15,7 @@ interface BannerProps {
   children?: ReactNode;
 }
 
-const Banner = ({
-  title,
-  description,
-  time,
-  level,
-  backgroundColor,
-  backgroundImg,
-  children,
-}: BannerProps) => {
+const Banner = ({ title, description, time, level, backgroundColor, backgroundImg, children }: BannerProps) => {
   return (
     <section className="banner">
       <div className="container">
@@ -38,18 +30,15 @@ const Banner = ({
               <div className="banner__details">
                 <div className="banner__detail">
                   <div className="banner__icon">
-                    <img src={hourglassIcon} alt="hourglass icon" />
+                    <img src={area} alt="hourglass icon" />
                   </div>
                   <span className="banner__detail-text">{time} mins</span>
                 </div>
                 <div className="banner__detail">
                   <div className="banner__icon">
-                    <img src={levelIcon} alt="level icon" />
+                    <img src={category} alt="level icon" />
                   </div>
-                  <span
-                    className="banner__detail-text"
-                    data-value={level?.toLowerCase()}
-                  >
+                  <span className="banner__detail-text" data-value={level?.toLowerCase()}>
                     {level}
                   </span>
                 </div>
