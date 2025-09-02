@@ -4,21 +4,25 @@ import { shuffleArray } from "../utils/shuffleArray";
 const useMealData = () => {
   const { request } = useHttp();
 
-  const _apiBase = "https://www.themealdb.com/api/json/v1/1/";
+  const _apiBase = "/api/json/v1/1/";
 
   const getAllRecipes = async () => {
-    const alphabet = "abcdefghijklmnopqrstuvwxyz0123456789";
+    try {
+      const alphabet = "abcdefghijklmnopqrstuvwxyz0123456789";
 
-    let recipes: any[] = [];
+      let recipes: any[] = [];
 
-    for (const letter of alphabet) {
-      const res = await request(`${_apiBase}search.php?f=${letter}`);
-      if (res.meals) {
-        recipes = [...recipes, ...res.meals.map(_transformRecipes)];
+      for (const letter of alphabet) {
+        const res = await request(`${_apiBase}search.php?f=${letter}`);
+        if (res.meals) {
+          recipes = [...recipes, ...res.meals.map(_transformRecipes)];
+        }
       }
-    }
 
-    return shuffleArray(recipes);
+      return shuffleArray(recipes);
+    } catch (e: any) {
+      throw new Error(e.message);
+    }
   };
 
   const _transformRecipes = (recipe: any) => {

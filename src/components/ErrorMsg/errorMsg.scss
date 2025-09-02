@@ -1,0 +1,6 @@
+@import "/src/styles/mixins.scss";
+
+.error-msg {
+  @include flex-center;
+  width: 20%;
+}
