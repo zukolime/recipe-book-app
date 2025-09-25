@@ -1,22 +1,18 @@
-import { useHttp } from "../hooks/http.hook";
-import { shuffleArray } from "../utils/shuffleArray";
+import { useHttp } from '../hooks/http.hook';
+import { shuffleArray } from '../utils/shuffleArray';
 
 const useMealData = () => {
   const { request } = useHttp();
 
-  const _apiBase = "/api/json/v1/1/";
+  const _apiBase = 'https://recipes-api-vercel.vercel.app/api';
 
   const getAllRecipes = async () => {
     try {
-      const alphabet = "abcdefghijklmnopqrstuvwxyz0123456789";
-
       let recipes: any[] = [];
 
-      for (const letter of alphabet) {
-        const res = await request(`${_apiBase}search.php?f=${letter}`);
-        if (res.meals) {
-          recipes = [...recipes, ...res.meals.map(_transformRecipes)];
-        }
+      const res = await request(_apiBase);
+      if (res) {
+        recipes = [...res];
       }
 
       return shuffleArray(recipes);
@@ -25,35 +21,20 @@ const useMealData = () => {
     }
   };
 
-  const _transformRecipes = (recipe: any) => {
-    const ingredients: string[] = [];
-    const measures: string[] = [];
+  // const _transformRecipes = (recipe: any) => {
+  //   const ingredients: string[] = [];
+  //   const measures: string[] = [];
 
-    for (let i = 1; i <= 20; i++) {
-      const ingredient = recipe[`strIngredient${i}`];
-      if (ingredient && ingredient.trim() !== "") {
-        ingredients.push(ingredient.trim());
-      }
-    }
-
-    for (let i = 1; i <= 20; i++) {
-      const measure = recipe[`strMeasure${i}`];
-      if (measure && measure.trim() !== "") {
-        measures.push(measure.trim());
-      }
-    }
-
-    return {
-      id: recipe.idMeal,
-      name: recipe.strMeal,
-      instruction: recipe.strInstructions,
-      thumbnail: recipe.strMealThumb,
-      category: recipe.strCategory,
-      area: recipe.strArea,
-      measures,
-      ingredients,
-    };
-  };
+  //   return {
+  //     id: recipe.idMeal,
+  //     name: recipe.strMeal,
+  //     instruction: recipe.strInstructions,
+  //     thumbnail: recipe.strMealThumb,
+  //     area: recipe.strArea,
+  //     measures,
+  //     ingredients,
+  //   };
+  // };
 
   return { getAllRecipes };
 };

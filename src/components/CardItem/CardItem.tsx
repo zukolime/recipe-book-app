@@ -1,33 +1,27 @@
-import { Link } from "react-router-dom";
-import FavBtn from "../FavBtn/FavBtn";
+import { Link } from 'react-router-dom';
+import FavBtn from '../FavBtn/FavBtn';
 
-import "../CardItem/card-item.scss";
+import { Recipe } from '../../types/recipe';
 
-interface Recipe {
-  id: string;
-  name: string;
-  thumbnail: string;
-  category: string;
-  area: string;
-}
+import '../CardItem/card-item.scss';
 
-const CardItem = ({ recipe }: { recipe: Recipe }) => {
+const CardItem = ({ id, thumbnail, name, difficulty, area }: Recipe) => {
   return (
-    <li className="cards__item">
-      <Link to={`/recipe/${recipe.id}`}>
+    <li className='cards__item'>
+      <Link to={`/recipe/${id}`}>
         <div
-          className="cards__header"
+          className='cards__header'
           style={{
-            background: `url(${recipe.thumbnail}) center / cover no-repeat`,
+            background: `url(${thumbnail}) center / cover no-repeat`,
           }}
         >
           <FavBtn />
         </div>
-        <div className="cards__info">
-          <h2 className="cards__title">{recipe.name}</h2>
-          <div className="cards__footer">
-            <span className="cards__category">{recipe.category}</span>
-            <span className="cards__area">{recipe.area}</span>
+        <div className='cards__info'>
+          <h2 className='cards__title'>{name}</h2>
+          <div className='cards__footer'>
+            <span className='cards__difficulty'>{difficulty}</span>
+            <span className='cards__area'>{area}</span>
           </div>
         </div>
       </Link>

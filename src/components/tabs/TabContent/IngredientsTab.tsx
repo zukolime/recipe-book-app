@@ -1,5 +1,5 @@
-import { useServings } from "../../../hooks/useServings";
-import { formatIngredientAmount } from "../../../utils/formatIngredientAmount";
+import { useServings } from '../../../hooks/useServings';
+// import { formatIngredientAmount } from "../../../utils/formatIngredientAmount";
 
 interface IngredientProps {
   name: string;
@@ -8,10 +8,10 @@ interface IngredientProps {
 }
 
 const baseIngredients: IngredientProps[] = [
-  { name: "boneless chicken breasts", baseAmount: "225", unit: "g" },
-  { name: "boneless chicken breasts", baseAmount: "Handful", unit: "Handful" },
-  { name: "bell peppers", baseAmount: "2", unit: "tbs" },
-  { name: "garlic cloves", baseAmount: "1", unit: "clove" },
+  { name: 'boneless chicken breasts', baseAmount: '225', unit: 'g' },
+  { name: 'boneless chicken breasts', baseAmount: 'Handful', unit: 'Handful' },
+  { name: 'bell peppers', baseAmount: '2', unit: 'tbs' },
+  { name: 'garlic cloves', baseAmount: '1', unit: 'clove' },
 ];
 
 const IngredientsTab = () => {
@@ -19,30 +19,33 @@ const IngredientsTab = () => {
 
   return (
     <>
-      <div className="tabcontent__header">
-        <h4 className="tabcontent__title">Ingredients</h4>
-        <div className="calc">
-          <button onClick={decrease} className="calc__btn">
+      <div className='tabcontent__header'>
+        <h4 className='tabcontent__title'>Ingredients</h4>
+        <div className='calc'>
+          <button
+            onClick={decrease}
+            className='calc__btn'
+          >
             -
           </button>
-          <span className="calc__text">{servings} servings</span>
-          <button onClick={increase} className="calc__btn">
+          <span className='calc__text'>{servings} servings</span>
+          <button
+            onClick={increase}
+            className='calc__btn'
+          >
             +
           </button>
         </div>
       </div>
 
-      <ul className="tabcontent__list">
+      <ul className='tabcontent__list'>
         {baseIngredients.map((ingredient, index) => (
-          <li key={index} className="tabcontent__item">
-            <h3 className="tabcontent__item-name">{ingredient.name}</h3>
-            <div className="tabcontent__item-info">
-              {formatIngredientAmount(
-                ingredient.baseAmount,
-                servings,
-                ingredient.unit
-              )}
-            </div>
+          <li
+            key={index}
+            className='tabcontent__item'
+          >
+            <h3 className='tabcontent__item-name'>{ingredient.name}</h3>
+            {/* <div className='tabcontent__item-info'></div>  */}
           </li>
         ))}
       </ul>
