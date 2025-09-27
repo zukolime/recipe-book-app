@@ -24,20 +24,16 @@ const CardsList = () => {
   const limit = 6;
 
   useEffect(() => {
-    fetchRecipes(true);
+    fetchRecipes(offset, true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const fetchRecipes = (initial: boolean) => {
+  const fetchRecipes = (offset: number, initial: boolean) => {
     initial ? setLoading(true) : setLoading(false);
-    getAllRecipes()
-      .then((recipes) => newItemsLoading(recipes, offset))
-      .catch(onError);
+    getAllRecipes(offset).then(newItemsLoading).catch(onError);
   };
 
-  const newItemsLoading = (recipes: Recipe[], newOffset: number) => {
-    const newItems = recipes.slice(newOffset, newOffset + limit);
-
+  const newItemsLoading = (newItems: Recipe[]) => {
     setRecipeList((prev) => [...prev, ...newItems]);
     setHasMore(newItems.length === limit);
     setOffset((prev) => prev + limit);
@@ -51,7 +47,7 @@ const CardsList = () => {
 
   const loadMore = () => {
     if (!loading && hasMore) {
-      fetchRecipes(false);
+      fetchRecipes(offset, false);
     }
   };
 
