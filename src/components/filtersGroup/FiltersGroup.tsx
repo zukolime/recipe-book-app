@@ -1,14 +1,45 @@
+import { useState, useEffect } from 'react';
+
+import useMealData from '../../services/getMealData';
+
+import { Recipe } from '../../types/recipe';
+
 const FiltersGroup = () => {
+  const [filters, setFilters] = useState<string[]>([]);
+
+  const { getAllAreas } = useMealData();
+
+  useEffect(() => {
+    fetchFilters();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const fetchFilters = () => {
+    getAllAreas().then(onFiltersLoaded);
+  };
+
+  const onFiltersLoaded = (areas: string[]) => {
+    const areaFilters = Array.from(new Set(areas));
+    setFilters(areaFilters);
+  };
+
+  const renderItems = () => {
+    return filters.map((filter) => (
+      <button
+        key={filter}
+        className='search__filter'
+      >
+        {filter}
+      </button>
+    ));
+  };
+
+  const btn = renderItems();
+
   return (
     <div className='search__filters'>
       <button className='search__filter active'>All</button>
-      <button className='search__filter'>Italian</button>
-      <button className='search__filter'>Asian</button>
-      <button className='search__filter'>Healthy</button>
-      <button className='search__filter'>Dessert</button>
-      <button className='search__filter'>Mexican</button>
-      <button className='search__filter'>French</button>
-      <button className='search__filter'>Greek</button>
+      {btn}
       <button className='search__filter'>Random!</button>
     </div>
   );

@@ -1,21 +1,22 @@
 import { useHttp } from '../hooks/http.hook';
 import { shuffleArray } from '../utils/shuffleArray';
 
+import { Recipe } from '../types/recipe';
+
 const useMealData = () => {
   const { request } = useHttp();
 
   const _apiBase = 'https://recipes-api-vercel.vercel.app/api';
   const _baseOffset = 0;
-  const limit = 6;
 
-  const getAllRecipes = async (offset = _baseOffset) => {
+  const getAllRecipes = async (offset = _baseOffset, limit = 6) => {
     try {
-      let recipes: any[] = [];
+      let recipes: Recipe[] = [];
 
       const res = await request(`${_apiBase}?offset=${offset}&limit=${limit}`);
 
       if (res) {
-        recipes = [...res.data];
+        recipes = [...recipes, ...res.data.map(_transformRecipes)];
       }
 
       return shuffleArray(recipes);
@@ -25,22 +26,36 @@ const useMealData = () => {
     }
   };
 
-  // const _transformRecipes = (recipe: any) => {
-  //   const ingredients: string[] = [];
-  //   const measures: string[] = [];
+  const getAllAreas = async () => {
+    let areas: string[] = [];
 
-  //   return {
-  //     id: recipe.idMeal,
-  //     name: recipe.strMeal,
-  //     instruction: recipe.strInstructions,
-  //     thumbnail: recipe.strMealThumb,
-  //     area: recipe.strArea,
-  //     measures,
-  //     ingredients,
-  //   };
-  // };
+    const res = await request(_apiBase);
+    if (res) {
+      areas = res.data.map((data: any) => data.area);
+    }
 
-  return { getAllRecipes };
+    return areas;
+  };
+
+  const _transformRecipes = (recipe: Recipe) => {
+    const ingredients: string[] = [];
+    const measures: string[] = [];
+    const instructions: string[] = [];
+
+    return {
+      id: recipe.id,
+      thumbnail: recipe.thumbnail,
+      name: recipe.name,
+      area: recipe.area,
+      difficulty: recipe.difficulty,
+      cookingTime: recipe.cookingTime,
+      instructions,
+      measures,
+      ingredients,
+    };
+  };
+
+  return { getAllRecipes, getAllAreas };
 };
 
 export default useMealData;
