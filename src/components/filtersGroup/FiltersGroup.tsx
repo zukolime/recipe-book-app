@@ -2,10 +2,8 @@ import { useState, useEffect } from 'react';
 
 import useMealData from '../../services/getMealData';
 
-import { Recipe } from '../../types/recipe';
-
 const FiltersGroup = () => {
-  const [filters, setFilters] = useState<string[]>([]);
+  const [buttons, setButtons] = useState<string[]>([]);
 
   const { getAllAreas } = useMealData();
 
@@ -15,16 +13,32 @@ const FiltersGroup = () => {
   }, []);
 
   const fetchFilters = () => {
-    getAllAreas().then(onFiltersLoaded);
+    getAllAreas().then(onFiltersLoaded).catch(onError);
   };
 
   const onFiltersLoaded = (areas: string[]) => {
     const areaFilters = Array.from(new Set(areas));
-    setFilters(areaFilters);
+    setButtons(areaFilters);
   };
 
-  const renderItems = () => {
-    return filters.map((filter) => (
+  const onError = () => {
+    return (
+      <span style={{ margin: '0.5rem', color: '#10b981' }}>
+        Error fetching filters from server
+      </span>
+    );
+  };
+
+  const renderItems = (buttons: string[]) => {
+    if (buttons.length === 0) {
+      return (
+        <span style={{ margin: '0.5rem', color: '#10b981' }}>
+          There are no filters by kitchen
+        </span>
+      );
+    }
+
+    return buttons.map((filter) => (
       <button
         key={filter}
         className='search__filter'
@@ -34,12 +48,12 @@ const FiltersGroup = () => {
     ));
   };
 
-  const btn = renderItems();
+  const btns = renderItems(buttons);
 
   return (
     <div className='search__filters'>
       <button className='search__filter active'>All</button>
-      {btn}
+      {btns}
       <button className='search__filter'>Random!</button>
     </div>
   );
