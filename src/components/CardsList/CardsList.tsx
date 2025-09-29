@@ -3,7 +3,7 @@ import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
 
 import CardItem from '../CardItem/CardItem';
 import Spinner from '../Spinner/Spinner';
-import ErrorMsg from '../ErrorMsg/ErrorMsg';
+import { ErrorMsg } from '../ErrorMsg/ErrorMsg';
 import useMealData from '../../services/getMealData';
 
 import { Recipe } from '../../types/recipe';

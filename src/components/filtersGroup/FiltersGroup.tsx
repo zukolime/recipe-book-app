@@ -4,6 +4,7 @@ import useMealData from '../../services/getMealData';
 
 const FiltersGroup = () => {
   const [buttons, setButtons] = useState<string[]>([]);
+  const [activeFilter, setActiveFilter] = useState<string>('All');
 
   const { getAllAreas } = useMealData();
 
@@ -13,7 +14,7 @@ const FiltersGroup = () => {
   }, []);
 
   const fetchFilters = () => {
-    getAllAreas().then(onFiltersLoaded).catch(onError);
+    getAllAreas().then(onFiltersLoaded);
   };
 
   const onFiltersLoaded = (areas: string[]) => {
@@ -21,16 +22,12 @@ const FiltersGroup = () => {
     setButtons(areaFilters);
   };
 
-  const onError = () => {
-    return (
-      <span style={{ margin: '0.5rem', color: '#10b981' }}>
-        Error fetching filters from server
-      </span>
-    );
+  const handleFilterChange = (filter: string) => {
+    setActiveFilter(filter);
   };
 
-  const renderItems = (buttons: string[]) => {
-    if (buttons.length === 0) {
+  const renderItems = (items: string[]) => {
+    if (items.length === 0) {
       return (
         <span style={{ margin: '0.5rem', color: '#10b981' }}>
           There are no filters by kitchen
@@ -38,10 +35,11 @@ const FiltersGroup = () => {
       );
     }
 
-    return buttons.map((filter) => (
+    return items.map((filter) => (
       <button
         key={filter}
-        className='search__filter'
+        className={`search__filter ${activeFilter === filter ? 'active' : ''}`}
+        onClick={() => handleFilterChange(filter)}
       >
         {filter}
       </button>
@@ -52,9 +50,21 @@ const FiltersGroup = () => {
 
   return (
     <div className='search__filters'>
-      <button className='search__filter active'>All</button>
+      <button
+        className={`search__filter ${activeFilter === 'All' ? 'active' : ''}`}
+        onClick={() => handleFilterChange('All')}
+      >
+        All
+      </button>
       {btns}
-      <button className='search__filter'>Random!</button>
+      <button
+        className={`search__filter ${
+          activeFilter === 'Random' ? 'active' : ''
+        }`}
+        onClick={() => handleFilterChange('Random')}
+      >
+        Random!
+      </button>
     </div>
   );
 };
