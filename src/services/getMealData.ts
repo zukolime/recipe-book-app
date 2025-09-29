@@ -31,7 +31,7 @@ const useMealData = () => {
 
     const res = await request(_apiBase);
     if (res) {
-      areas = res.data.map((data: any) => data.area);
+      areas = res.data.map((data: Recipe) => data.area);
     }
 
     return areas;
