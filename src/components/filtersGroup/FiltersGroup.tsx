@@ -19,7 +19,7 @@ const FiltersGroup = () => {
 
   const onFiltersLoaded = (areas: string[]) => {
     const areaFilters = Array.from(new Set(areas));
-    setButtons(areaFilters);
+    setButtons(['All', ...areaFilters, 'Random']);
   };
 
   const handleFilterChange = (filter: string) => {
@@ -48,25 +48,7 @@ const FiltersGroup = () => {
 
   const btns = renderItems(buttons);
 
-  return (
-    <div className='search__filters'>
-      <button
-        className={`search__filter ${activeFilter === 'All' ? 'active' : ''}`}
-        onClick={() => handleFilterChange('All')}
-      >
-        All
-      </button>
-      {btns}
-      <button
-        className={`search__filter ${
-          activeFilter === 'Random' ? 'active' : ''
-        }`}
-        onClick={() => handleFilterChange('Random')}
-      >
-        Random!
-      </button>
-    </div>
-  );
+  return <div className='search__filters'>{btns}</div>;
 };
 
 export default FiltersGroup;
