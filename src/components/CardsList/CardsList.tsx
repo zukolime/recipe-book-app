@@ -28,6 +28,8 @@ const CardsList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useInfiniteScroll(loadMore, ref);
+
   const fetchRecipes = (offset: number, initial: boolean) => {
     initial ? setLoading(true) : setLoading(false);
     getAllRecipes(offset).then(newItemsLoading).catch(onError);
@@ -45,13 +47,11 @@ const CardsList = () => {
     setLoading(false);
   };
 
-  const loadMore = () => {
+  function loadMore() {
     if (!loading && hasMore) {
       fetchRecipes(offset, false);
     }
-  };
-
-  useInfiniteScroll(loadMore, ref);
+  }
 
   const renderItems = recipeList.map((recipe) => (
     <CardItem
