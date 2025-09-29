@@ -1,14 +1,16 @@
-import Banner from "../Banner/Banner";
-import SearchPanel from "../SearchPanel/SearchPanel";
-import CardsList from "../CardsList/CardsList";
+import Banner from '../Banner/Banner';
+import SearchPanel from '../SearchPanel/SearchPanel';
+import CardsList from '../CardsList/CardsList';
+
+import { FilterProvider } from '../../context/FilterContext';
 
 const MainPage = () => {
   return (
-    <>
-      <Banner title="Discover Recipes" />
-      <SearchPanel placeholder="Search recipes..." />
+    <FilterProvider>
+      <Banner title='Discover Recipes' />
+      <SearchPanel placeholder='Search recipes...' />
       <CardsList />
-    </>
+    </FilterProvider>
   );
 };
 

@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useFilter } from '../../context/FilterContext';
 
 import useMealData from '../../services/getMealData';
 
 const FiltersGroup = () => {
   const [buttons, setButtons] = useState<string[]>([]);
-  const [activeFilter, setActiveFilter] = useState<string>('All');
 
+  const { activeFilter, setActiveFilter } = useFilter();
   const { getAllAreas } = useMealData();
 
   useEffect(() => {

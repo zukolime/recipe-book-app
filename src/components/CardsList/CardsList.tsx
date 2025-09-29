@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
+import { useFilter } from '../../context/FilterContext';
 
 import CardItem from '../CardItem/CardItem';
 import Spinner from '../Spinner/Spinner';
@@ -21,6 +22,8 @@ const CardsList = () => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   const { getAllRecipes } = useMealData();
+  const { activeFilter } = useFilter();
+
   const limit = 6;
 
   useEffect(() => {
@@ -42,6 +45,14 @@ const CardsList = () => {
     setLoading(false);
   };
 
+  const filteredRecipes = recipeList.filter(({ area }) => {
+    return (
+      activeFilter === area ||
+      activeFilter === 'All' ||
+      activeFilter === 'Random'
+    );
+  });
+
   const onError = () => {
     setError(true);
     setLoading(false);
@@ -53,7 +64,7 @@ const CardsList = () => {
     }
   }
 
-  const renderItems = recipeList.map((recipe) => (
+  const renderItems = filteredRecipes.map((recipe) => (
     <CardItem
       key={recipe.id}
       {...recipe}
