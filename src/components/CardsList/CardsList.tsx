@@ -22,7 +22,7 @@ const CardsList = () => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   const { getAllRecipes } = useMealData();
-  const { activeFilter } = useFilter();
+  const { activeFilter, triggerRandom } = useFilter();
 
   const limit = 6;
 
@@ -32,7 +32,7 @@ const CardsList = () => {
     setHasMore(true);
     fetchRecipes(0, true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeFilter]);
+  }, [activeFilter, triggerRandom]);
 
   useInfiniteScroll(loadMore, ref);
 

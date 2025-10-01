@@ -6,7 +6,7 @@ import useMealData from '../../services/getMealData';
 const FiltersGroup = () => {
   const [buttons, setButtons] = useState<string[]>([]);
 
-  const { activeFilter, setActiveFilter } = useFilter();
+  const { activeFilter, setActiveFilter, setTriggerRandom } = useFilter();
   const { getAllAreas } = useMealData();
 
   useEffect(() => {
@@ -24,7 +24,12 @@ const FiltersGroup = () => {
   };
 
   const handleFilterChange = (filter: string) => {
-    setActiveFilter(filter);
+    if (filter === 'Random' && activeFilter === 'Random') {
+      setActiveFilter('Random');
+      setTriggerRandom((prev) => !prev);
+    } else {
+      setActiveFilter(filter);
+    }
   };
 
   const renderItems = (items: string[]) => {
