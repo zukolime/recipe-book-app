@@ -6,17 +6,23 @@ import { Recipe } from '../types/recipe';
 const useMealData = () => {
   const { request } = useHttp();
 
-  const _apiBase = 'https://recipes-api-vercel.vercel.app/api';
+  const _apiBase = 'https://recipes-api-zuko.vercel.app/api/recipes';
   const _baseOffset = 0;
 
-  const getAllRecipes = async (offset = _baseOffset, limit = 6) => {
+  const getAllRecipes = async (
+    offset = _baseOffset,
+    limit = 6,
+    area = 'All'
+  ) => {
     try {
       let recipes: Recipe[] = [];
 
-      const res = await request(`${_apiBase}?offset=${offset}&limit=${limit}`);
+      const res = await request(
+        `${_apiBase}?area=${area}&offset=${offset}&limit=${limit}`
+      );
 
       if (res) {
-        recipes = [...recipes, ...res.data.map(_transformRecipes)];
+        recipes = [...recipes, ...res.map(_transformRecipes)];
       }
 
       return shuffleArray(recipes);
@@ -26,12 +32,18 @@ const useMealData = () => {
     }
   };
 
+  // const getRecipeByArea = async (area: string) => {
+  //   const lowerArea = area.toLowerCase();
+  //   const res = await request(`${_apiBase}?area=${lowerArea}`);
+  //   console.log(res);
+  // };
+
   const getAllAreas = async () => {
     let areas: string[] = [];
 
     const res = await request(_apiBase);
     if (res) {
-      areas = res.data.map((data: Recipe) => data.area);
+      areas = res.map((data: Recipe) => data.area);
     }
 
     return areas;

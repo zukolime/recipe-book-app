@@ -27,15 +27,20 @@ const CardsList = () => {
   const limit = 6;
 
   useEffect(() => {
-    fetchRecipes(offset, true);
+    setRecipeList([]);
+    setOffset(0);
+    setHasMore(true);
+    fetchRecipes(0, true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [activeFilter]);
 
   useInfiniteScroll(loadMore, ref);
 
   const fetchRecipes = (offset: number, initial: boolean) => {
     initial ? setLoading(true) : setLoading(false);
-    getAllRecipes(offset).then(newItemsLoading).catch(onError);
+    getAllRecipes(offset, limit, activeFilter)
+      .then(newItemsLoading)
+      .catch(onError);
   };
 
   const newItemsLoading = (newItems: Recipe[]) => {
@@ -44,14 +49,6 @@ const CardsList = () => {
     setOffset((prev) => prev + limit);
     setLoading(false);
   };
-
-  const filteredRecipes = recipeList.filter(({ area }) => {
-    return (
-      activeFilter === area ||
-      activeFilter === 'All' ||
-      activeFilter === 'Random'
-    );
-  });
 
   const onError = () => {
     setError(true);
@@ -64,7 +61,7 @@ const CardsList = () => {
     }
   }
 
-  const renderItems = filteredRecipes.map((recipe) => (
+  const renderItems = recipeList.map((recipe) => (
     <CardItem
       key={recipe.id}
       {...recipe}
