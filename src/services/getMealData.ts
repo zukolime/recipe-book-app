@@ -32,12 +32,6 @@ const useMealData = () => {
     }
   };
 
-  // const getRecipeByArea = async (area: string) => {
-  //   const lowerArea = area.toLowerCase();
-  //   const res = await request(`${_apiBase}?area=${lowerArea}`);
-  //   console.log(res);
-  // };
-
   const getAllAreas = async () => {
     let areas: string[] = [];
 
