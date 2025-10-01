@@ -1,6 +1,9 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 type FilterContextType = {
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+
   activeFilter: string;
   setActiveFilter: (filter: string) => void;
   triggerRandom: boolean;
@@ -10,13 +13,23 @@ type FilterContextType = {
 const FilterContext = createContext<FilterContextType | undefined>(undefined);
 
 export const FilterProvider = ({ children }: { children: ReactNode }) => {
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
   const [activeFilter, setActiveFilter] = useState<string>('All');
   const [triggerRandom, setTriggerRandom] = useState<boolean>(false);
 
+  const contextValues = {
+    searchQuery,
+    setSearchQuery,
+
+    activeFilter,
+    setActiveFilter,
+    triggerRandom,
+    setTriggerRandom,
+  };
+
   return (
-    <FilterContext.Provider
-      value={{ activeFilter, setActiveFilter, triggerRandom, setTriggerRandom }}
-    >
+    <FilterContext.Provider value={contextValues}>
       {children}
     </FilterContext.Provider>
   );

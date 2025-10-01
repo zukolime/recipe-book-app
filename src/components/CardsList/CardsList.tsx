@@ -21,8 +21,8 @@ const CardsList = () => {
 
   const ref = useRef<HTMLDivElement | null>(null);
 
-  const { getAllRecipes } = useMealData();
-  const { activeFilter, triggerRandom } = useFilter();
+  const { getAllRecipes, getRecipeByName } = useMealData();
+  const { searchQuery, activeFilter, triggerRandom } = useFilter();
 
   const limit = 6;
 
@@ -30,9 +30,14 @@ const CardsList = () => {
     setRecipeList([]);
     setOffset(0);
     setHasMore(true);
-    fetchRecipes(0, true);
+
+    if (searchQuery.trim() !== '') {
+      fetchRecipeByName(searchQuery);
+    } else {
+      fetchRecipes(0, true);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeFilter, triggerRandom]);
+  }, [searchQuery, activeFilter, triggerRandom]);
 
   useInfiniteScroll(loadMore, ref);
 
@@ -60,6 +65,17 @@ const CardsList = () => {
       fetchRecipes(offset, false);
     }
   }
+
+  const fetchRecipeByName = (name: string) => {
+    setLoading(true);
+    getRecipeByName(name)
+      .then((recipes) => {
+        setRecipeList(recipes);
+        setHasMore(false);
+        setLoading(false);
+      })
+      .catch(onError);
+  };
 
   const renderItems = recipeList.map((recipe) => (
     <CardItem

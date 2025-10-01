@@ -32,6 +32,11 @@ const useMealData = () => {
     }
   };
 
+  const getRecipeByName = async (name: string) => {
+    const res = await request(`${_apiBase}?name=${name}`);
+    return res.map(_transformRecipes);
+  };
+
   const getAllAreas = async () => {
     let areas: string[] = [];
 
@@ -61,7 +66,7 @@ const useMealData = () => {
     };
   };
 
-  return { getAllRecipes, getAllAreas };
+  return { getAllRecipes, getAllAreas, getRecipeByName };
 };
 
 export default useMealData;
