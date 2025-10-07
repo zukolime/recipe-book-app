@@ -12,14 +12,22 @@ const useMealData = () => {
   const getAllRecipes = async (
     offset = _baseOffset,
     limit = 6,
-    area = 'All'
+    area = 'All',
+    name?: string
   ) => {
     try {
       let recipes: Recipe[] = [];
+      let res;
 
-      const res = await request(
-        `${_apiBase}?area=${area}&offset=${offset}&limit=${limit}`
-      );
+      if (name) {
+        res = await request(
+          `${_apiBase}?area=${area}&offset=${offset}&limit=${limit}&name=${name}`
+        );
+      } else {
+        res = await request(
+          `${_apiBase}?area=${area}&offset=${offset}&limit=${limit}`
+        );
+      }
 
       if (res) {
         recipes = [...recipes, ...res.map(_transformRecipes)];
@@ -32,10 +40,10 @@ const useMealData = () => {
     }
   };
 
-  const getRecipeByName = async (name: string) => {
-    const res = await request(`${_apiBase}?name=${name}`);
-    return res.map(_transformRecipes);
-  };
+  // const getRecipeByName = async (name: string) => {
+  //   const res = await request(`${_apiBase}?name=${name}`);
+  //   return res.map(_transformRecipes);
+  // };
 
   const getAllAreas = async () => {
     let areas: string[] = [];
@@ -66,7 +74,7 @@ const useMealData = () => {
     };
   };
 
-  return { getAllRecipes, getAllAreas, getRecipeByName };
+  return { getAllRecipes, getAllAreas };
 };
 
 export default useMealData;

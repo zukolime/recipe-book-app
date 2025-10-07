@@ -21,7 +21,7 @@ const CardsList = () => {
 
   const ref = useRef<HTMLDivElement | null>(null);
 
-  const { getAllRecipes, getRecipeByName } = useMealData();
+  const { getAllRecipes } = useMealData();
   const { searchQuery, activeFilter, triggerRandom } = useFilter();
 
   const limit = 6;
@@ -30,12 +30,8 @@ const CardsList = () => {
     setRecipeList([]);
     setOffset(0);
     setHasMore(true);
+    fetchRecipes(0, true);
 
-    if (searchQuery.trim() !== '') {
-      fetchRecipeByName(searchQuery);
-    } else {
-      fetchRecipes(0, true);
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery, activeFilter, triggerRandom]);
 
@@ -43,7 +39,7 @@ const CardsList = () => {
 
   const fetchRecipes = (offset: number, initial: boolean) => {
     initial ? setLoading(true) : setLoading(false);
-    getAllRecipes(offset, limit, activeFilter)
+    getAllRecipes(offset, limit, activeFilter, searchQuery)
       .then(newItemsLoading)
       .catch(onError);
   };
@@ -65,17 +61,6 @@ const CardsList = () => {
       fetchRecipes(offset, false);
     }
   }
-
-  const fetchRecipeByName = (name: string) => {
-    setLoading(true);
-    getRecipeByName(name)
-      .then((recipes) => {
-        setRecipeList(recipes);
-        setHasMore(false);
-        setLoading(false);
-      })
-      .catch(onError);
-  };
 
   const renderItems = recipeList.map((recipe) => (
     <CardItem
